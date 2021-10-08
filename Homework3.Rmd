@@ -1,0 +1,149 @@
+---
+title: "Homework 3"
+author: "Kelsey Neis"
+date: "10/8/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+library(latex2exp)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1
+
+You are given a task to evaluate how well a new fire mapping algorithm works. The fire mapping algorithm is a Bayesian classifier which labels all the locations into two classes, burned and unburned. To evaluate the algorithm, two regions are tested. The confusion matrices of these two regions are given in Table 1 and Table 2.
+
+\textbf{a)} Calculate the TPR, FPR, Precision, Recall, and F-measure for the “burned” class for both
+Dataset 1 and Dataset 2
+
+\textbf{TPR (true positive rate):}
+
+\begin{equation}
+  \begin{split}
+  TPR_{D1} = \dfrac{TP}{TP+FN} = \dfrac{30}{30+20}=.6\\
+  TPR_{D2}=\dfrac{TP}{TP+FN} = \dfrac{30}{30+20}=.6
+    \end{split}
+\end{equation}
+
+\textbf{FPR (false positive rate):}
+
+\begin{equation}
+  \begin{split}
+  FPR_{D1}=\dfrac{FP}{FP+TN}=\dfrac{10}{10+40}=.2
+  FPR_{D2}=\dfrac{1000}{1000+4000}=.2
+    \end{split}
+\end{equation}
+
+
+\textbf{Precision:}
+
+\begin{equation}
+  \begin{split}
+  Precision_{D1}=\dfrac{TP}{TP+FP}= \dfrac{30}{30+10}=.75
+  Precision_{D2}=\dfrac{30}{30+1000}= .029
+    \end{split}
+\end{equation}
+
+\textbf{F-measure:}
+
+\begin{equation}
+  \begin{split}
+  F1_{D1}=\dfrac{2\times TP}{2\times TP+FP+FN}=\dfrac{60}{60+10+20}=.667
+  F1_{D2}=\dfrac{60}{60+1000+20}= .0555
+    \end{split}
+\end{equation}
+
+\textbf{b)} Is there a difference in the values of the metrics evaluated in part (a) for the two datasets? If so, what characteristics of the data sets (that are used to derive the above contingency tables) lead to the differences between the values of (TPR, FPR) and (Precision, Recall, F-measure) that you observe above.
+
+Yes, although they have the same TPR(recall) and FPR, the precision of Dataset 1 is much higher and the F1 measure for the second data set is much lower. Since the second data set has way more cases where the actual class is unburned, that proportion, compared with the relatively small number of cases in the burned class, makes for a highly skewed data set. Since Precision and F1-measure are sensitive to skew, those results differ greatly between D1 and D2.
+
+\newpage
+
+## Question 2
+
+Consider a data set with instances belonging to one of two classes - positive (+) and negative (-). A classifier was built using a training set consisting of an equal number of positive and negative instances. Among the training instances, the classifier has a recall m=50% on the positive class and a recall of n=90% on the negative class. The trained classifier is now tested on two data sets. Both have similar data characteristics as the training set. The first data set has 1000 positive and 1000 negative instances. The second data set has 100 positive and 1000 negative instances.
+
+\textbf{a)} Draw the expected confusion matrix summarizing the expected classifier performance on the
+two data sets.
+
+\begin{equation}
+  \begin{split}
+  Recall_{positive}= \dfrac{TP}{TP+FN} =.5\\
+  TP = .5(TP+FN)\\
+  TP=FN\\
+  Recall_{negative}=\dfrac{TN}{TN+FP} = .9\\
+  TN=.9(TN+FP)\\
+  TN=9FP
+    \end{split}
+\end{equation}
+
+\begin{center}
+  \begin{tabular}{ | l | c | c | }
+    \hline
+     & Algorithm Output = (+) & Algorithm Output = (-) \\ \hline
+    True Label = (+) & 500 & 500 \\ \hline
+    True Label = (-) & 100 & 900 \\ 
+    \hline
+  \end{tabular}
+\end{center}
+
+\begin{center}
+  \begin{tabular}{ | l | c | c | }
+    \hline
+     & Algorithm Output = (+) & Algorithm Output = (-) \\ \hline
+    True Label = (+) & 50 & 50 \\ \hline
+    True Label = (-) & 100 & 900 \\ 
+    \hline
+  \end{tabular}
+\end{center}
+
+\textbf{b)} What is the accuracy of the classifier on the training set? Compute the precision, TPR and
+FPR for the two test data sets using the confusion matrix from part A. Also report the accuracy
+of the classifier on both data sets.
+
+\begin{equation}
+  \begin{split}
+  Precision_{D1} = \dfrac{TP}{TP+FP}= \dfrac{500}{500+100}=.8\bar{33}\\
+  Precision_{D2} = \dfrac{TP}{TP+FP}= \dfrac{50}{50+100}=.\bar{33}\\
+  TPR_{D1} = Recall_{positive}= .5\\
+  TPR_{D2} = Recall_{positive}= .5\\
+  FPR_{D1} = \dfrac{FP}{FP+TN} = \dfrac{100}{100+900}=.1\\
+  FPR_{D2} = \dfrac{FP}{FP+TN} = \dfrac{100}{100+900}=.1\\
+  Accuracy_{D1} = \dfrac{Number\ of\ correct\ predictions}{Total\ number\ of\ predictions}=\dfrac{1400}{2000}=.7\\
+  Accuracy_{D2} = \dfrac{Number\ of\ correct\ predictions}{Total\ number\ of\ predictions}=\dfrac{950}{1100}=.8\bar{63}\\
+    \end{split}
+\end{equation}
+
+\textbf{c)} In the scenario where the class imbalance is pretty high, how are precision and recall better metrics in comparison to overall accuracy? What information does precision capture that recall doesn’t?
+
+Precision and recall can provide more information about accuracy with regard to class, as opposed to overall accuracy. This can be very important information to preserve, especially for applications such as testing for a disease.
+\newpage
+
+## Question 3
+
+You are trying to evaluate four different COVID-19 tests, T1, T2, T3, and T4. These tests have been developed by different organizations, and their evaluations by these organizations have been reported in the following evaluation measures: TPR and FPR as follows
+
+T1: TPR = 0.5 and FPR = 0.01,
+T2: TPR = 0.99 and FPR = 0.1,
+T3: TPR = 0.99 and FPR = 0.01,
+T4: TPR = 0.9 and FPR = 0.05.
+
+Note that T1, T2 and T3 correspond to the classifiers T1, T2 and T3 introduced in the lecture note “chap4_imbalanced_classes.pdf” on pages 25-27
+
+\textbf{a)} Calculate the number of True Positives (TP), False Positives (FP), True Negatives (TN), and False Negatives (FN) using the classifier T4 for the following cases:
+
+\quad 1. Balanced skew case in which we have 100 positives and 100 negatives (Note: Confusion matrices of T1, T2 and T3 for this case are provided on slide 25)
+
+\quad 2. Medium skew case in which we have 100 positives and 1000 negatives (Note: Confusion matrices of T1, T2 and T3 for this case are provided on slide 26)
+
+\quad 3. High skew case in which we have 100 positives and 10000 negatives (Note: Confusion matrices of T1, T2 and T3 for this case are provided on slide 27)
+
+\textbf{b)} Compute precision, recall, F-measure, TPR/FPR of T4 for each of the aforementioned three cases
+
+\textbf{c)} Which classifier is strictly better than T4 (irrespective of skew)? Briefly explain why.
+
+\textbf{d)} Which classifier is strictly worse than T4 (irrespective of skew)? Briefly explain why.
+
+\textbf{e)} Which classifiers may be better or worse than T4 (depending on skew)? Briefly explain why.
+
