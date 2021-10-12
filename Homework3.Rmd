@@ -58,7 +58,7 @@ Dataset 1 and Dataset 2
 
 Yes, although they have the same TPR(recall) and FPR, the precision of Dataset 1 is much higher and the F1 measure for the second data set is much lower. Since the second data set has way more cases where the actual class is unburned, that proportion, compared with the relatively small number of cases in the burned class, makes for a highly skewed data set. Since Precision and F1-measure are sensitive to skew, those results differ greatly between D1 and D2.
 
-\newpage
+\newpage 
 
 ## Question 2
 
@@ -135,15 +135,185 @@ Note that T1, T2 and T3 correspond to the classifiers T1, T2 and T3 introduced i
 
 \quad 1. Balanced skew case in which we have 100 positives and 100 negatives (Note: Confusion matrices of T1, T2 and T3 for this case are provided on slide 25)
 
+\begin{equation}
+  \begin{split}
+  TPR_{T4} = \dfrac{TP}{TP+FN} = .9\\
+  TP = 9FN\\
+  TP = 90\\
+  FN = 10\\
+  FPR_{T4} = \dfrac{FP}{FP+TN} = .05\\
+  .95FP = .05TN\\
+  19FP = TN\\
+  FP = 5\\
+  TN = 95
+    \end{split}
+\end{equation}
+
+\begin{center}
+  \begin{tabular}{ | l | c | c | }
+    \hline
+     & Algorithm Output = (Yes) & Algorithm Output = (No) \\ \hline
+    True Label = (Yes) & 90 & 10 \\ \hline
+    True Label = (No) & 5 & 95 \\ 
+    \hline
+  \end{tabular}
+\end{center}
+
 \quad 2. Medium skew case in which we have 100 positives and 1000 negatives (Note: Confusion matrices of T1, T2 and T3 for this case are provided on slide 26)
+
+\begin{equation}
+  \begin{split}
+  TP = 9FN\\
+  TP = 90\\
+  FN = 10\\
+  19FP = TN\\
+  FP = 50\\
+  TN = 950
+    \end{split}
+\end{equation}
+
+\begin{center}
+  \begin{tabular}{ | l | c | c | }
+    \hline
+     & Algorithm Output = (Yes) & Algorithm Output = (No) \\ \hline
+    True Label = (Yes) & 90 & 10 \\ \hline
+    True Label = (No) & 50 & 950 \\ 
+    \hline
+  \end{tabular}
+\end{center}
 
 \quad 3. High skew case in which we have 100 positives and 10000 negatives (Note: Confusion matrices of T1, T2 and T3 for this case are provided on slide 27)
 
+\begin{equation}
+  \begin{split}
+  TP = 9FN\\
+  TP = 90\\
+  FN = 10\\
+  19FP = TN\\
+  FP = 500\\
+  TN = 9500
+    \end{split}
+\end{equation}
+
+\begin{center}
+  \begin{tabular}{ | l | c | c | }
+    \hline
+     & Algorithm Output = (Yes) & Algorithm Output = (No) \\ \hline
+    True Label = (Yes) & 90 & 10 \\ \hline
+    True Label = (No) & 500 & 9500 \\ 
+    \hline
+  \end{tabular}
+\end{center}
+
 \textbf{b)} Compute precision, recall, F-measure, TPR/FPR of T4 for each of the aforementioned three cases
+
+Balanced:
+\begin{equation}
+  \begin{split}
+    Precision_{1} = \dfrac{TP}{TP+FP}= \dfrac{90}{90+5}=.947\\
+    Recall_{1} = TPR_{1} = \dfrac{TP}{TP+FN} = \dfrac{90}{90+10} = .9\\
+    FPR_{1} = \dfrac{FP}{FP+TN} = \dfrac{5}{5+95} = .05\\
+    F-measure_{1} = \dfrac{2\times TP}{2\times TP+FP+FN} = \dfrac{180}{180+5+10}=.923\\
+        \end{split}
+\end{equation}
+Medium skew:
+\begin{equation}
+  \begin{split}
+    Precision_{2} = \dfrac{TP}{TP+FP}= \dfrac{90}{90+50}=.643\\
+    Recall_{2} = TPR_{2} = \dfrac{TP}{TP+FN} = \dfrac{90}{90+10} = .9\\
+    FPR_{2} = \dfrac{FP}{FP+TN} = \dfrac{50}{50+950} = .05\\
+    F-measure_{2} = \dfrac{2\times TP}{2\times TP+FP+FN} = \dfrac{180}{180+50+10}=.75\\
+            \end{split}
+\end{equation}
+High skew:
+\begin{equation}
+  \begin{split}
+    Precision_{3} = \dfrac{TP}{TP+FP}= \dfrac{90}{90+500}=.153\\
+    Recall_{3} = TPR_{3} = \dfrac{TP}{TP+FN} = \dfrac{90}{90+10} = .9\\
+    FPR_{3} = \dfrac{FP}{FP+TN} = \dfrac{500}{500+9500} = .05\\
+    F-measure_{3} = \dfrac{2\times TP}{2\times TP+FP+FN} = \dfrac{180}{180+500+10}=.261
+                \end{split}
+\end{equation}
+
 
 \textbf{c)} Which classifier is strictly better than T4 (irrespective of skew)? Briefly explain why.
 
+T3 has better F-measure and Precision across all levels of skew.
+
 \textbf{d)} Which classifier is strictly worse than T4 (irrespective of skew)? Briefly explain why.
 
+None of the other classifiers are strictly worse across all measures.
+
 \textbf{e)} Which classifiers may be better or worse than T4 (depending on skew)? Briefly explain why.
+
+T4 is better than T2 in medium and high skew cases, because the difference in the FP and TN labels is magnified by the skew. 
+
+\newpage
+
+## Question 4
+
+Consider a data set with four binary attributes X1, X2, X3 and X4. The attribute X4 takes exactly
+the same value as X3 for each record, i.e., X4 is equal to X3. In each of the following three
+scenarios, find whether the decision boundary learnt by the two models would be similar,
+otherwise find which of the two models would perform better. Provide a brief justification for
+each.
+
+\textbf{(i)} We build two Naïve Bayes models:
+
+\textbf{a)} M1 that is learnt using all the four attributes.
+
+\textbf{b)} M2 that is learnt using the three attributes X1, X2, and X3.
+
+M2 will perform better than M1, because correlated attributes degrade the performance of Naïve Bayes models.
+
+\textbf{(ii)} We build two ANN models:
+
+\textbf{a)} M1 that is learnt using all the four attributes.
+
+\textbf{b)} M2 that is learnt using the three attributes X1, X2, and X3.
+
+M1 and M2 will perform similarly, since M1 doesn't have an excessive number of correlated attributes and redundant attributes receive the same weights.
+
+\newpage
+
+## Question 5
+
+For each of the two given scenarios, make a right choice of K for the KNN classifier in order to
+obtain better performance with a brief explanation.
+
+\textbf{a)} K = 1 or K=5 or K = 50?
+
+K = 1 will be best. The decision boundary is large and clean enough where if a new data point is added and it's on one or the other side of the boundary, there's a good chance it's in the same class as its nearest neighbor. Furthermore, the plus class is more spread out, so if you were to increase K, there might be a risk that you'd capture many circles when looking for K nearest neighbors.
+
+\textbf{b)} K = 1 or K = 5 or K=50?
+
+K = 5 will ensure that the noise does not affect the choices made. 
+
+\newpage
+
+## Question 6
+
+\textbf{a)} If you had to choose between the Naïve Bayes and Decision Tree classifiers, which
+would you prefer for a classification problem where there are numerous missing values in
+the training and test data sets? Indicate your choice of classifier and briefly explain why the other
+one may not work so well?
+
+I would choose a decision tree, as there are many more available methods to deal with missing values, and I could experiment with those methods until I found the most effective. For example, rather than simply ignoring the missing values, I could employ a probabilistic approach to try to ascertain the missing values.
+
+\textbf{b)} Consider the problem of predicting whether a person is a good credit risk given the
+following attributes: hair color, income, weight, time in current job, marital status, height,
+age, and birth month. If you had to choose between Ripper and a k-nearest neighbor classifier,
+which would you prefer? Indicate your choice of classifier and briefly explain why the other
+one may not work so well?
+
+I would use Ripper, because this would provide a hierarchical system in which some attributes are given more importance to making the decision. K-NN would simply not capture the greater significance of income than hair color when calculating distance between data points. Also, K-NN would not handle missing values as well as Ripper, and some of the attributes in this problem seem unlikely to have values for every data point.
+
+\newpage
+
+## Question 7
+
+Given the data sets shown in Figure 2, explain how the decision tree, naïve Bayes (NB), and
+k-nearest neighbor (k-NN) classifiers would perform on these data sets.
+
+
 
