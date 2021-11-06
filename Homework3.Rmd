@@ -246,17 +246,13 @@ None of the other classifiers are strictly worse across all measures.
 
 \textbf{e)} Which classifiers may be better or worse than T4 (depending on skew)? Briefly explain why.
 
-T4 is better than T2 in medium and high skew cases, because the difference in the FP and TN labels is magnified by the skew. 
+T4 is better than T2 in medium and high skew cases, because the difference in the FP and TN labels is magnified by the skew. T1 is worse in low and medium skew (in most measures), but better in high skew. This is because the FP for T1 is a smaller proportion of the negative cases than T4, so that makes up for the poor TP to FN ratio that T1 has.
 
 \newpage
 
 ## Question 4
 
-Consider a data set with four binary attributes X1, X2, X3 and X4. The attribute X4 takes exactly
-the same value as X3 for each record, i.e., X4 is equal to X3. In each of the following three
-scenarios, find whether the decision boundary learnt by the two models would be similar,
-otherwise find which of the two models would perform better. Provide a brief justification for
-each.
+Consider a data set with four binary attributes X1, X2, X3 and X4. The attribute X4 takes exactly the same value as X3 for each record, i.e., X4 is equal to X3. In each of the following three scenarios, find whether the decision boundary learnt by the two models would be similar, otherwise find which of the two models would perform better. Provide a brief justification for each.
 
 \textbf{(i)} We build two Naïve Bayes models:
 
@@ -298,13 +294,9 @@ would you prefer for a classification problem where there are numerous missing v
 the training and test data sets? Indicate your choice of classifier and briefly explain why the other
 one may not work so well?
 
-I would choose a decision tree, as there are many more available methods to deal with missing values, and I could experiment with those methods until I found the most effective. For example, rather than simply ignoring the missing values, I could employ a probabilistic approach to try to ascertain the missing values.
+I would choose Naive Bayes, since it not only handles missing values in the training set, but can more efficiently handle missing values in the test set by excluding the missing values from the computations, whereas the decision tree's methods for dealing with missing values leads to more splitting, and thus a more complex model.
 
-\textbf{b)} Consider the problem of predicting whether a person is a good credit risk given the
-following attributes: hair color, income, weight, time in current job, marital status, height,
-age, and birth month. If you had to choose between Ripper and a k-nearest neighbor classifier,
-which would you prefer? Indicate your choice of classifier and briefly explain why the other
-one may not work so well?
+\textbf{b)} Consider the problem of predicting whether a person is a good credit risk given the following attributes: hair color, income, weight, time in current job, marital status, height, age, and birth month. If you had to choose between Ripper and a k-nearest neighbor classifier, which would you prefer? Indicate your choice of classifier and briefly explain why the other one may not work so well?
 
 I would use Ripper, because this would provide a hierarchical system in which some attributes are given more importance to making the decision. K-NN would simply not capture the greater significance of income than hair color when calculating distance between data points. Also, K-NN would not handle missing values as well as Ripper, and some of the attributes in this problem seem unlikely to have values for every data point.
 
@@ -312,8 +304,9 @@ I would use Ripper, because this would provide a hierarchical system in which so
 
 ## Question 7
 
-Given the data sets shown in Figure 2, explain how the decision tree, naïve Bayes (NB), and
-k-nearest neighbor (k-NN) classifiers would perform on these data sets.
+Given the data sets shown in Figure 2, explain how the decision tree, naïve Bayes (NB), and k-nearest neighbor (k-NN) classifiers would perform on these data sets.
 
+1st figure: a decision tree would handle this data well, since the distinguishing attributes would be identified through the course of running the algorithm, so the first few splits would lead to relatively pure leaves. Naïve Bayes would handle the noise well, since it appears to be evenly distributed among Class A and Class B, which means that the noise attributes would not impact the posterior probability estimates. However it wouldn't work well overall, because the distinguishing attributes are not conditionally independent - if one of them is true, then we know that the rest are false. K-NN would not do well with the noisy attributes, since they would artificially change the proximity between instances. One way to deal with that could be to perform dimensionality reduction beforehand to get rid of the noisy attributes.
 
+2nd figure: the decision tree would have difficulty with this data, because the two attributes are interacting: given the value of one attribute, this does not provide enough information to distinguish between classes. Naïve Bayes would also not handle this data well, since the two attributes are not completely conditionally independent. K-NN would be able to perform well, because K-NN handles interacting attributes well.
 
