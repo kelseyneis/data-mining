@@ -76,17 +76,68 @@ As expected, the number of itemsets decreases proportionally as the threshold in
 
 9. At support threshold 1%, we see frequent itemset of size three along with size 2 and 1. However, at the support threshold of 2%, we observe itemsets of size 1 and 2 only. Why do you think this is so?
 
+The larger the itemset, the less likely it will be frequent. 1- and 2-itemsets, in other words, 1-word and 2-word pairs are more likely to be frequent than a 3-word sequence.
 
 10. Run Apriori to generate frequent itemsets of length 2 at support thresholds of 1%, 2%, 3%, 4% and 5%. In a single figure, for each threshold (X-axis), plot the number of itemsets of length 2 (Y-axis). Comment on the general trends illustrated by the plots and the reason for the trend.
+
+![2-itemsets](images/frequent-2-itemsets.png)
+
+The count of frequent 2-itemsets follows a similar trend to the plot not constrained by itemset size, except that it declines more rapidly as the support threshold increases, perhaps because of excluding the frequent 1-itemsets.
 
 11. For the following itemset, write down its corresponding support value:
 
 •Mineral Water
 
+0.238
+
 •Chocolate
+
+0.164
 
 •Eggs
 
+0.18
+
 •Eggs, Mineral Water
 
+0.051
+
 •Chocolate, Mineral Water
+
+0.053
+
+\newpage
+
+## Problem 2
+
+The files for this problem is under Experiment 2 folder. Datasets to be used for experimentation: instacart transaction.csv. Jupyter notebook: Instacart association.ipynb. Instacart, an online grocer, has graciously made some of their datasets accessible to the public (https://www.instacart.com/datasets/grocery-shopping-2017). In this experiment, we will use apriori algorithm to find correlations between the different items in the store. Answer the following question:
+
+1. Given following transactions:
+
+• order 1: apple, egg, milk
+
+• order 2: carrot, milk
+
+• order 3: apple, egg, carrot
+
+• order 4: apple, egg
+
+• order 5: apple, carrot
+
+Using the apriori algorithm, write down the pair of items having a minimum threshold of 3. Briefly describe your steps.
+
+In the first round, gather 1-itemsets: \{apple\}, \{egg\}, \{milk\}, \{carrot\}. Eliminate \{carrot\} and \{milk\} since they don't meet the minimum threshold of 3.
+
+In the second round, gather 2-itemsets from the 1-itemsets that were not pruned: $\fbox{\{apple, egg\}}$ is the only one, and it meets the threshold of 3.
+
+2. How many unique orders and unique items are there in the dataset? Are unique order same as number of records in the dataset? On average, per order, how many items does a customer order?
+
+Unique orders: 3214874, Unique items: 49677
+
+3. Run apriori to generate pairs of itemset at support thresholds of 1%, 2%, 4%, 6%, 8%, and 10%. In a single figure, for each threshold (X-axis), plot the number of association rules (Y-axis). Comment on the trend of algorithm runtime at different thresholds.
+
+
+4. Run apriori at support thresholds of 1%, 2%, 4%, 6%, 8% and 10%. For each threshold, write a pair of association rules (you can choose any) along with its key metrics (i.e. freqAB, supportAB, freqA,supportA, freqB, support, confidenceAtoB, confidenceBtoA, lift). As a data scientist for the retailer giant, after observing the association rules, what would you do to increase the sales.
+
+
+\newpage
