@@ -92,3 +92,49 @@ Number of Centroids in Circle (c): 2
 Brief explanation: The left centroid will get the points from A and B, and then move until it's in A. The other centroids will stay put, taking each a portion of the points in C.
 
 \newpage
+
+# Question 4
+
+\textbf{Consider a set of 5 points in two-dimensional space, shown in the following table:}
+
+![q4-1](q4-1.png)
+
+\textbf{Assuming Euclidean distance as the distance measure.The pairwise distance matrix between the 5 points has been computed in the below figure for you, where the ijth entry in the matrix corresponds to the distance between point i and point j.x}
+
+![q4-2](q4-2.png)
+\textbf{For this question you are allowed to paste an image of your handwritten/plotted dendrogram as part of the solution.}
+
+\textbf{a) Use the single link (MIN) hierarchical clustering technique for clustering these 5 points and show the dendrogram of the clustering.The dendrogram should clearly show the order in which the points are merged.}
+
+![MIN clustering](q4-a.jpg)
+
+\textbf{b) Use the complete link (MAX) hierarchical clustering technique for clustering these 5 points and show the dendrogram of the clustering.The dendrogram should clearly show the order in which the points are merged.}
+
+![MAX clustering](q4-b.jpg)
+
+\newpage
+
+# Question 5
+
+\textbf{Suppose we apply DBSCAN to cluster the following dataset using Euclidean distance.}
+
+![q5](q5.png)
+
+\textbf{A point is a core point if its density (num point within EPS) is >= MinPts. Given that MinPts = 3 and EPS = 1, answer the following questions.}
+
+\textbf{a) Label all points as “core points,” “boundary points,” and “noise.”}
+
+A: noise, B: core, C: core, D: boundary, E: core, F: core, G: boundary, H: noise, I: core, J: core, L: core, M: core
+
+\textbf{b) What is the clustering result?}
+
+One cluster with B, C, D, E, F, G (B, C, E, F are connected points) and another cluster with I, J, L, M and A and H are eliminated
+
+\textbf{c) Repeat the above two questions when EPS = $\sqrt{2}$}
+
+A: boundary, B: core, C: core, D: core, E: core, F: core, G: core, H: boundary, I: core, J: core, L: core, M: core
+
+Result: One cluster with A, B, C, D, E, F, G and another cluster with H, I, J, L, M
+
+\newpage
+
