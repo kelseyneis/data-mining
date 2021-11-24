@@ -138,3 +138,70 @@ Result: One cluster with A, B, C, D, E, F, G and another cluster with H, I, J, L
 
 \newpage
 
+# Question 6
+
+\textbf{As shown in Fig. A and Fig. B, there are two datasets of 400 two-dimensional data points in 4 different clusters colored by four different colors – blue, red, green, and magenta. Also given are the distance matrices (400 x400) for the two datasets in Fig. C and Fig. D. The colorbar shows the distances between points, with the color blue indicating the lowest distances and the color red indicating the highest.}
+
+![A and B](q6-1.png)
+
+![C](q6-2.png)
+
+![D](q6-3.png)
+
+\newpage
+
+\textbf{(a) Match the matrices with their corresponding datasets and provide a brief justification.}
+
+D corresponds to data set B and C corresponds to A. The clusters in A are more tightly clustered, so I expect to see mostly blue on the diagonal, which C exhibits.
+
+\textbf{(b) Also, figure out the corresponding rows (or columns, doesn’t matter which as the matrix is symmetric) representing the points of each cluster. Assume that the rows corresponding to the points of a cluster are consecutive. Therefore, Rows 1-100 belong to the same cluster, Rows 101-200 belong to the same cluster, and so on.}
+
+A: red: 1-100, green: 101-200, blue: 201-300, pink: 301-400
+
+B: red: 1-100, green: 101-200, blue: 201-300, pink: 301-400
+
+\newpage
+
+# Question 7
+
+\textbf{Comparison of clustering algorithms.}
+
+\textbf{a. List one advantage and one disadvantage  of EM (Gaussian mixture model clustering) over fuzzy c-means.}
+
+Advantage: EM can find clusters of various shapes and sizes because they are more general than fuzzy c-means.
+
+Disadvantage: it is computationally expensive
+
+\textbf{b. Discuss the relative performance of  MAX and MIN agglomerative clustering for the followingcases:}
+
+\textbf{i) presence of noise}
+
+MAX handles noise better, because proximity is determined by the furthest point in a cluster.
+
+\textbf{ii) high dimensional data}
+
+Both MAX and MIN clustering have difficulty with high dimensional data, because all merges are final. MIN may be slightly better, though, because it is less biased towards globular clusters and won't break up larger clusters as the distance of the furthest point doesn't determine cluster assignment as in MAX.
+
+\newpage
+
+# Question 8
+
+\textbf{You have the choice of using single-link, complete-link, and DBSCAN to perform clustering for the following cases? The cluster density is the same for the first three cases (a-c), while the last case (d) has one dense cluster with 50000 points and one relatively sparse cluster with 50 points with noise data points in between. Assume that the points inside a boundary are denser than the points outside the boundary, which represent the noise points (cases b and d). Cases a and c do not have any noise points. Note that the label of each diagram in the following figure matches the corresponding part of this question, e.g., Figure (a) goes with question part (a)}
+
+![q8](q8.png)
+
+\textbf{a) Which of the three schemes will perform the worst? Why?}
+
+I think complete-link would perform the worst. Since the clusters are relatively sparse, it might end up splitting them up, especially the larger one.
+
+\textbf{b) Which of the three schemes will perform the best? Why?}
+
+DBSCAN handles noise the best, because it is based on density. Since the noise points are sparser than the clusters, DBSCAN will correctly label the noise points as such.
+
+\textbf{c) Which of the three schemes will perform the worst? Why?}
+
+Complete link would perform the worst, since the clusters are not globular and complete link doesn't handle those cases well. There is also a risk of the algorithm splitting up the clusters.
+
+\textbf{d) How will DBSCAN perform? Will it depend on the density of noise?}
+
+It will not do well here. Because you choose a value for EPS and minpts, it doesn't handle the variation in density between the two clusters. For example, if EPS is set too high, the smaller cluster will pull in noise, if too low, the larger cluster won't be identified. It does depend on noise density, because the difference in density between the small cluster and the noise is much greater than the difference between the density of the large cluster and the noise.
