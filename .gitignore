@@ -1,0 +1,13 @@
+.Rproj.user
+csci5523-final-project
+.Rhistory
+.RData
+.Ruserdata
+*.zip
+*.csv
+*.json
+*.txt
+*.data
+*.ipynb_checkpoints
+.DS_Store
+final_exploratory_analysis/
